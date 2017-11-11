@@ -20,7 +20,7 @@ defmodule Cards do
     end
   end
 
-  def shuffer(deck) do
+  def shuffler(deck) do
     Enum.shuffle(deck)
   end
 
@@ -57,9 +57,14 @@ defmodule Cards do
     end
   end
 
+  @doc """
+  Create a deck of playing cards, shuffle that deck and drop a hand, the `hand_size` parameter indicate how many 
+  cards will be droped.
+  Return a tuple with one list of string representing the hand and other list of string representing the remaining deck cards.
+  """
   def drop_hand(hand_size) do
     Cards.create_deck
-    |> Cards.shuffer
+    |> Cards.shuffler
     |> Cards.deal(hand_size)
   end
 
