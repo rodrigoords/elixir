@@ -6,11 +6,6 @@ defmodule Cards do
   @doc """
   Returns a list of String representing a dock of playing cards.
 
-  ## Examples
-
-      iex> Cards.create_deck
-      ["Jack of Spades", "Queen of Spades", "King of Spades", ...]
-
   """
   def create_deck do
     values = ["Jack", "Queen", "King", "Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
@@ -24,6 +19,17 @@ defmodule Cards do
     Enum.shuffle(deck)
   end
 
+  @doc """
+  
+  Check deck contains a given card.
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> Cards.contains?(deck, "Queen of Spades")
+      true
+
+  """
   def contains?(deck, hand) do
     Enum.member?(deck, hand)
   end
@@ -35,9 +41,8 @@ defmodule Cards do
   ## Examples
 
       iex> deck = Cards.create_deck
-      iex> { hand, deck } = Cards.deal(deck, 2)
+      iex> { hand, _deck } = Cards.deal(deck, 2)
       iex> hand
-
       ["Jack of Spades", "Queen of Spades"]
 
   """
