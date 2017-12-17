@@ -3,7 +3,7 @@ defmodule Discuss.Repo.Migrations.AddTopics do
 
   def change do
     create table(:topics) do
-      add :tittle, :string
+      add :title, :string
     end
   end
 end
