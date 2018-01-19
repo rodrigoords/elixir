@@ -16,7 +16,7 @@ defmodule Discuss.TopicController do
     def create(conn, %{"topic" => topic}) do
         changeset = Topic.changeset(%Topic{}, topic)
         case Repo.insert(changeset) do
-            {:ok, post} -> 
+            {:ok, _topic} -> 
                 conn
                 |> put_flash(:info, "Topic Created")
                 |> redirect(to: topic_path(conn, :index))
@@ -26,6 +26,21 @@ defmodule Discuss.TopicController do
     end
     
     def edit(conn, %{"id" => topic_id}) do
-        
+        topic = Repo.get(Topic, topic_id)
+        changeset = Topic.changeset(topic)
+        render conn, "edit.html", changeset: changeset, topic: topic
+    end
+
+    def update(conn, %{"id" => topic_id, "topic" => topic}) do       
+       old_topic = Repo.get(Topic, topic_id)
+       changeset = Topic.changeset(old_topic, topic_id)
+       case Repo.update(changeset) do
+           {:ok, _topic} ->
+            conn
+            |> put_flash(:info, "Topic updated")
+            |> redirect(to: topic_path(conn, :index))
+           {:error, changeset} ->
+            render conn, "edit.html", changeset: changeset, topic: old_topic
+       end
     end
 end
