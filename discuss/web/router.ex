@@ -17,17 +17,7 @@ defmodule Discuss.Router do
     
     pipe_through :browser # Use the default browser stack
 
-    get "/", TopicController, :index
-
-    get "/topic/new", TopicController, :new
-
-    post "/topic", TopicController, :create
-
-    get "/topics/:id/edit", TopicController, :edit
-
-    put "/topics/:id", TopicController, :update
-
-    delete "/topics/:id", TopicController, :delete
+    resources "/", TopicController
 
   end
 
